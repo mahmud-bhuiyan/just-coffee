@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const AddCoffee = () => {
   const handleAddCoffee = (event) => {
     event.preventDefault();
@@ -20,6 +22,34 @@ const AddCoffee = () => {
       photo,
     };
     console.log(newCoffee);
+
+    fetch("http://localhost:5000/coffee", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Coffee added successfully!",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: "An error occurred",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+      });
   };
   return (
     <div className="m-5 px-6 md:px-40 pt-16 pb-20 bg-[#F4F3F0]">
