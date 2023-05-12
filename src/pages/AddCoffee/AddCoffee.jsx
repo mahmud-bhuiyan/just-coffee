@@ -51,6 +51,7 @@ const AddCoffee = () => {
         });
       });
   };
+
   return (
     <div className="m-5 px-6 md:px-40 pt-16 pb-20 bg-[#F4F3F0]">
       <h3 className="text-2xl font-bold text-center mb-8">Add New Coffee</h3>
